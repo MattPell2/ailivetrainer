@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Live Trainer — Real-Time Workout Coach</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>🏋️ AI Live Trainer</h1>
+    <p class="tagline">Always-on, camera-based workout coaching. 100% free, runs entirely in your browser — no video ever leaves your device.</p>
+  </header>
+
+  <main>
+    <!-- Setup panel: pick or describe a workout -->
+    <section id="setup-panel" class="panel">
+      <h2>What workout are you doing?</h2>
+      <div class="workout-input-row">
+        <input type="text" id="workout-text" placeholder='Type it, e.g. "squats" or "I want to do push-ups"' autocomplete="off" />
+        <button id="mic-btn" title="Say your workout out loud">🎤</button>
+      </div>
+      <div class="workout-chips" id="workout-chips"></div>
+      <button id="start-btn" disabled>Start Workout</button>
+      <p id="setup-status" class="status-line">Loading AI model…</p>
+    </section>
+
+    <!-- Live training view -->
+    <section id="live-panel" class="panel hidden">
+      <div class="live-layout">
+        <div class="video-wrap">
+          <video id="video" autoplay playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <div id="visibility-banner" class="hidden">Step back so I can see your whole body</div>
+        </div>
+
+        <aside class="coach-panel">
+          <div class="exercise-header">
+            <h2 id="exercise-name"></h2>
+            <button id="stop-btn">End Workout</button>
+          </div>
+
+          <div class="metrics">
+            <div class="metric">
+              <span class="metric-value" id="rep-count">0</span>
+              <span class="metric-label" id="rep-label">reps</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value" id="phase-indicator">—</span>
+              <span class="metric-label">phase</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value" id="form-score">—</span>
+              <span class="metric-label">form</span>
+            </div>
+          </div>
+
+          <div class="coach-says">
+            <h3>Coach</h3>
+            <div id="feedback-current" class="feedback-current">Get in position…</div>
+            <ul id="feedback-log"></ul>
+          </div>
+
+          <details class="steps-box" open>
+            <summary>How to do it</summary>
+            <ol id="exercise-steps"></ol>
+          </details>
+
+          <label class="voice-toggle">
+            <input type="checkbox" id="voice-enabled" checked />
+            Voice coaching
+          </label>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Pose tracking by MediaPipe (on-device). No account, no cloud, no cost.</p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
